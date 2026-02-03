@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>1st MONTHSARY</title>
+
+<style>
+body {
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(#7711bb, #d016ff);
+}
+
+/* Flower container */
+.sunflower {
+  position: relative;
+  width: 260px;
+  height: 400px;
+}
+
+/* Petals */
+.petals {
+    z-index: 1;
+  position: absolute;
+  top: 40px;
+  left: 30px;
+  width: 200px;
+  height: 200px;
+  animation: rotate 10s linear infinite;
+}
+
+.petal {
+    
+  position: absolute;
+  width: 40px;
+  height: 100px;
+  background: #ffcc00;
+  border-radius: 50%;
+  top: 0;
+  left: 80px;
+  transform-origin: bottom center;
+}
+
+.petal:nth-child(1)  { transform: rotate(0deg); }
+.petal:nth-child(2)  { transform: rotate(30deg); }
+.petal:nth-child(3)  { transform: rotate(60deg); }
+.petal:nth-child(4)  { transform: rotate(90deg); }
+.petal:nth-child(5)  { transform: rotate(120deg); }
+.petal:nth-child(6)  { transform: rotate(150deg); }
+.petal:nth-child(7)  { transform: rotate(180deg); }
+.petal:nth-child(8)  { transform: rotate(210deg); }
+.petal:nth-child(9)  { transform: rotate(240deg); }
+.petal:nth-child(10) { transform: rotate(270deg); }
+.petal:nth-child(11) { transform: rotate(300deg); }
+.petal:nth-child(12) { transform: rotate(330deg); }
+
+/* Center */
+.center {
+  position: absolute;
+  top: 90px;
+  left: 90px;
+  width: 80px;
+  height: 80px;
+  background: #6b3e26;
+  border-radius: 50%;
+  z-index: 2;
+  animation: pulse 3s ease-in-out infinite;
+}
+
+/* Stem */
+.stem {
+    
+  position: absolute;
+  width: 12px;
+  height: 180px;
+  background: #2e8b57;
+  top: 200px;
+  left: 124px;
+}
+
+/* Leaves */
+.leaf {
+  position: absolute;
+  width: 80px;
+  height: 40px;
+  background: #3cb371;
+  border-radius: 50%;
+  top: 260px;
+}
+
+.leaf.left {
+  left: 50px;
+  transform: rotate(25deg);
+}
+
+.leaf.right {
+  right: 50px;
+  transform: rotate(-25deg);
+}
+
+#flowertxt {
+  position: absolute;
+  top: 100px;
+  font-family: 'Arial', sans-serif;
+  font-size: 150px;
+  color: #fff;
+  text-shadow: 2px 6px 10px #000;
+  width: 100%;
+  text-align: center;
+}
+
+#buttonstart {
+  position: absolute;
+  bottom: 450px;
+  padding: 15px 30px;
+  font-size: 24px;
+  background-color: #ff69b4;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  box-shadow: 2px 4px 6px #000;
+  font-size: 70px;
+}
+
+
+
+/* Animations */
+@keyframes rotate {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50%      { transform: scale(1.05); }
+}
+</style>
+</head>
+
+<body>
+    <H1 id="flowertxt">HAPPY 1ST MONTHSARY LUV</H1>
+    <BR></BR>
+
+<div class="sunflower">
+  <div class="petals">
+    <div class="petal"></div><div class="petal"></div><div class="petal"></div>
+    <div class="petal"></div><div class="petal"></div><div class="petal"></div>
+    <div class="petal"></div><div class="petal"></div><div class="petal"></div>
+    <div class="petal"></div><div class="petal"></div><div class="petal"></div>
+  </div>
+
+  <div class="center"></div>
+  <div class="stem"></div>
+  <div class="leaf left"></div>
+  <div class="leaf right"></div>
+</div>
+    <button id="buttonstart">
+        <a href="album.html" style="text-decoration: none; color: white;">Click Me!</a>
+
+    </button>
+</body>
+</html>

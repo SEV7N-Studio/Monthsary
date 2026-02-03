@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>our album</title>
+    <style>
+        :root { color-scheme: light dark; }
+        body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+             margin: 0; 
+             padding: 24px; 
+             background-color: linear-gradient(75deg, pink violet); 
+             color: CanvasText; }
+        h1 { text-align: center; margin: 0 0 16px; }
+        .carousel { position: relative; width: 100%; max-width: 900px; margin: 0 auto; overflow: hidden; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        .carousel-track { display: flex; transition: transform 400ms ease; will-change: transform; }
+        .slide { min-width: 100%; user-select: none; }
+        .slide img { display: block; width: 100%; height: 420px; object-fit: cover; background: #222; }
+        .control { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.45); color: #fff; border: 0; width: 42px; height: 42px; border-radius: 50%; cursor: pointer; display: grid; place-items: center; }
+        .control:hover { background: rgba(0,0,0,0.6); }
+        .control.prev { left: 10px; }
+        .control.next { right: 10px; }
+        .dots { position: absolute; left: 0; right: 0; bottom: 10px; display: flex; gap: 8px; justify-content: center; }
+        .dot { width: 10px; height: 10px; border-radius: 50%; background: rgba(255,255,255,0.6); cursor: pointer; border: 0; }
+        .dot.active { background: #fff; }
+        .credits { text-align: center; margin-top: 14px; font-size: 0.9rem; opacity: 0.7; }
+        #letter_div{
+            background-color: #fff;
+            border-radius: 10px;
+            font-weight: 700;
+            color: black;
+            font-size: 20px;
+            padding: 10px;
+            text-align: justify;
+        }
+    </style>
+</head>
+<body>
+    <h1>Our Photos 💗💗💗</h1>
+    <div class="carousel" id="carousel">
+        <div class="carousel-track">
+            <div class="slide"><img src="img1.JPG" alt="Photo 1"></div>
+            <div class="slide"><img src="img2.JPG" alt="Photo 2"></div>
+            <div class="slide"><img src="img3.JPG" alt="Photo 3"></div>
+            <div class="slide"><img src="img4.JPG" alt="Photo 1"></div>
+            <div class="slide"><img src="img5.JPG" alt="Photo 2"></div>
+            <div class="slide"><img src="img6.JPG" alt="Photo 3"></div>
+        </div>
+        <button class="control prev" aria-label="Previous">&#10094;</button>
+        <button class="control next" aria-label="Next">&#10095;</button>
+        <div class="dots"></div>
+    </div>
+
+    <br>
+    <br>
+    <br>
+
+    <a href="index.html" style="background-color: rgb(119, 37, 119); 
+    text-decoration: none;
+    border-radius: 40px;
+    font-size: 30px;
+    font-weight: bold;
+    padding: 20px 30px;
+    font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+
+    a:hover{
+        background-color: rgb(146, 46, 146);
+    }
+    ">BACK</a>
+
+    <br>
+    <br><br><br><hr>
+    <div id="letter_div">
+        <p id="letter">
+            Hi, luv ko, <i>I love you so much</i>. No words can 
+            explain how grateful I am that I have you. I know 
+            sometimes we have our battles, but that’s part of 
+            life and part of loving each other. What matters most 
+            to me is that we always choose each other, even on 
+            he hard days.
+            Thank you for your patience, your understanding, and for loving me the way you do. You make my days 
+            brighter, my heart calmer, and my life more meaningful.
+             I may not always be perfect, but I promise to keep 
+             trying, to keep growing, and to keep choosing you—today, tomorrow, and always.
+            I will always choose to be with you, luv. 💜💜💜
+        </p>
+    </div>
+
+    <audio src="Jim Brickman, Martina McBride - Valentine (Lyrics).mp3" autoplay="true" ></audio>
+
+    <!--
+    <div class="credits">Place your images in the images/ folder and rename src paths above.</div> -->
+
+    <script>
+    (function() {
+      const root = document.getElementById('carousel');
+      const track = root.querySelector('.carousel-track');
+      const slides = Array.from(root.querySelectorAll('.slide'));
+      const prevBtn = root.querySelector('.control.prev');
+      const nextBtn = root.querySelector('.control.next');
+      const dotsWrap = root.querySelector('.dots');
+
+      let index = 0;
+      let intervalId = null;
+      const autoplayMs = 3500;
+
+      // Build dots
+      slides.forEach((_, i) => {
+        const d = document.createElement('button');
+        d.className = 'dot' + (i === 0 ? ' active' : '');
+        d.setAttribute('aria-label', 'Slide ' + (i+1));
+        d.addEventListener('click', () => goTo(i, true));
+        dotsWrap.appendChild(d);
+      });
+
+      const dots = Array.from(root.querySelectorAll('.dot'));
+
+      function update() {
+        track.style.transform = `translateX(-${index * 100}%)`;
+        dots.forEach((d, i) => d.classList.toggle('active', i === index));
+      }
+
+      function goTo(i, pause) {
+        index = (i + slides.length) % slides.length;
+        update();
+        if (pause) restartAutoplay();
+      }
+
+      function next(pause) { goTo(index + 1, pause); }
+      function prev(pause) { goTo(index - 1, pause); }
+
+      prevBtn.addEventListener('click', () => prev(true));
+      nextBtn.addEventListener('click', () => next(true));
+
+      // Keyboard
+      root.setAttribute('tabindex', '0');
+      root.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft') prev(true);
+        if (e.key === 'ArrowRight') next(true);
+      });
+
+      // Swipe
+      let startX = 0, dx = 0, dragging = false;
+      const onStart = (x) => { dragging = true; startX = x; dx = 0; track.style.transition = 'none'; };
+      const onMove = (x) => {
+        if (!dragging) return;
+        dx = x - startX;
+        const pct = (dx / root.clientWidth) * 100;
+        track.style.transform = `translateX(calc(-${index * 100}% + ${-pct}%))`;
+      };
+      const onEnd = () => {
+        if (!dragging) return;
+        track.style.transition = '';
+        const threshold = root.clientWidth * 0.2;
+        if (dx > threshold) prev(true);
+        else if (dx < -threshold) next(true);
+        else update();
+        dragging = false;
+      };
+      root.addEventListener('pointerdown', (e) => { root.setPointerCapture(e.pointerId); onStart(e.clientX); });
+      root.addEventListener('pointermove', (e) => onMove(e.clientX));
+      root.addEventListener('pointerup', onEnd);
+      root.addEventListener('pointercancel', onEnd);
+      root.addEventListener('pointerleave', onEnd);
+
+      function startAutoplay() {
+        stopAutoplay();
+        intervalId = setInterval(() => next(false), autoplayMs);
+      }
+      function stopAutoplay() {
+        if (intervalId) clearInterval(intervalId);
+        intervalId = null;
+      }
+      function restartAutoplay() {
+        stopAutoplay();
+        startAutoplay();
+      }
+
+      // Pause on hover/focus
+      root.addEventListener('mouseenter', stopAutoplay);
+      root.addEventListener('mouseleave', startAutoplay);
+      root.addEventListener('focusin', stopAutoplay);
+      root.addEventListener('focusout', startAutoplay);
+
+      // Initialize
+      update();
+      startAutoplay();
+      // Handle responsive image height changes
+      window.addEventListener('resize', update);
+    })();
+    </script>
+</body>
+</html>
